@@ -1,0 +1,43 @@
+<!-- app/views/articles/index.html.erb -->
+
+<h1>Articles</h1>
+
+<%= form_tag articles_path, method: :get, id: "search-form" do %>
+  <%= text_field_tag :search, params[:search], id: "search-input", placeholder: "Search articles..." %>
+  <%= submit_tag "Search", name: nil, id: "search-submit", form: "search-form" %>
+<% end %>
+
+
+
+<div class="row">
+  <div class="col-md-8">
+    <% if @articles.any? %>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody id="search-results">
+          <%= render partial: "search_result" %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No articles found</p>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <%= render partial: "articles/analytics", locals: { search_data: @search_data, user_search_data: @user_search_data } %>
+  </div>
+</div>
+
+
+
+
+
+
+
+  
+

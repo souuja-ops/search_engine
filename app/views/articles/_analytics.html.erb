@@ -1,0 +1,88 @@
+
+<style>
+  .chart-container {
+    position: relative;
+    height: 75px;
+    width: 25%;
+    margin-bottom: 50px;
+  }
+
+  .chart-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25%;
+    width: 25%;
+  }
+</style>
+
+
+<canvas id="search-chart" data-search-data="<%= @search_data.to_json %>"></canvas>
+<canvas id="most-searched-chart" data-most-searched-data="<%= @most_searched_terms.to_json %>"></canvas>
+
+
+<script>
+
+  console.log("search-chart element:", document.getElementById('search-chart'));
+  console.log("most-searched-chart element:", document.getElementById('most-searched-chart'));
+  
+  const searchChart = document.getElementById('search-chart');
+  const mostSearchedChart = document.getElementById('most-searched-chart');
+  const searchChartData = JSON.parse(searchChart.getAttribute('data-search-data'));
+  const mostSearchedData = JSON.parse(mostSearchedChart.getAttribute('data-most-searched-data'));
+  
+
+  // Search chart
+  new Chart(searchChart, {
+    type: 'line',
+    data: {
+      labels: Object.keys(searchChartData),
+      datasets: [{
+        label: 'Number of searches',
+        data: Object.values(searchChartData),
+        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+        borderColor: 'rgba(0, 123, 255, 1)',
+        borderWidth: 1,
+        pointRadius: 2,
+        pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+        pointBorderColor: 'rgba(0, 123, 255, 1)',
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+        pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+  // Most searched chart
+  new Chart(mostSearchedChart, {
+    type: 'horizontalBar',
+    data: {
+      labels: Object.keys(mostSearchedData),
+      datasets: [{
+        label: 'Number of searches',
+        data: Object.values(mostSearchedData),
+        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+        borderColor: 'rgba(0, 123, 255, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>

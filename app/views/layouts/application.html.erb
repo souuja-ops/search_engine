@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SearchEngine</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <%= javascript_pack_tag 'search' %>
+    <%= stylesheet_link_tag 'custom_articles', media: 'all' %>
+    <%= stylesheet_link_tag 'auth', media: 'all' %>
+
+
+
+  </head>
+
+  <body>
+
+    <div id="menu">
+      <% if user_signed_in? %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "signout-btn" %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path, class: "signin-signup-btn" %>
+        <%= link_to "Sign in", new_user_session_path, class: "signin-signup-btn" %>
+      <% end %>
+    </div>
+    
+    <%= yield %>
+  </body>
+</html>
+
+
+
+
+
+

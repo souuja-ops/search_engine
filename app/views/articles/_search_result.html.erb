@@ -1,0 +1,8 @@
+<% @articles.each do |article| %>
+    <!-- app/views/articles/_search_result.html.erb -->
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= truncate(article.body, length: 100) %></td>
+    </tr>
+    
+<% end %>
